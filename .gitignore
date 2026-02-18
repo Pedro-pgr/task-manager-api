@@ -34,3 +34,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# macOS artifacts
+.DS_Store
+**/.DS_Store
