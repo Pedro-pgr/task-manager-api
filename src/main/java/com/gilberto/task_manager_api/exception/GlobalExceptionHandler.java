@@ -84,7 +84,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String handleResourceNotFound(ResourceNotFoundException ex, HttpService request){
+    public String handleResourceNotFound(ResourceNotFoundException ex, HttpService request) {
         return ex.getMessage();
     }
 

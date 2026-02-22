@@ -18,7 +18,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class    TaskService {
+public class TaskService {
 
     private final TaskRepository taskRepository;
     private final UserRepository userRepository;
@@ -108,7 +108,7 @@ public class    TaskService {
 
         return taskRepository.findByIdAndUserId(taskId, user.getId())
                 .map(this::toResponse)
-                .orElseThrow(() -> new ResourceNotFoundException("Task not found by this id for the user"));
-  }
+                .orElseThrow(() -> new ResourceNotFoundException("Task not found with id:" + taskId));
+    }
 }
 
