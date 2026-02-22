@@ -36,6 +36,15 @@ public class TaskController {
         return ResponseEntity.ok(tasks);
     }
 
+    //Add: Get task by id
+    @GetMapping("/{id}")
+    public ResponseEntity<TaskResponse> findById(@PathVariable("id") UUID taskId,
+                                                 Authentication authentication) {
+        TaskResponse task = taskService.findById(authentication.getName(), taskId);
+        return ResponseEntity.ok(task);
+    }
+
+
     @PostMapping
     public ResponseEntity<TaskResponse> createTask(@Valid @RequestBody TaskRequest request,
                                                    Authentication authentication) {
@@ -57,5 +66,5 @@ public class TaskController {
         taskService.deleteTask(authentication.getName(), id);
         return ResponseEntity.noContent().build();
     }
-}
 
+}

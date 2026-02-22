@@ -3,6 +3,7 @@ package com.gilberto.task_manager_api.service;
 import com.gilberto.task_manager_api.dto.task.TaskFilter;
 import com.gilberto.task_manager_api.dto.task.TaskRequest;
 import com.gilberto.task_manager_api.dto.task.TaskResponse;
+import com.gilberto.task_manager_api.exception.ResourceNotFoundException;
 import com.gilberto.task_manager_api.model.Task;
 import com.gilberto.task_manager_api.model.User;
 import com.gilberto.task_manager_api.repository.TaskRepository;
@@ -100,6 +101,14 @@ public class TaskService {
                 .createdAt(task.getCreatedAt())
                 .userId(task.getUser().getId())
                 .build();
+    }
+
+    public TaskResponse findById(String userEmail, UUID taskId) {
+        User user = getUserByEmail(userEmail);
+
+        return taskRepository.findByIdAndUserId(taskId, user.getId())
+                .map(this::toResponse)
+                .orElseThrow(() -> new ResourceNotFoundException("Task not found with id:" + taskId));
     }
 }
 
